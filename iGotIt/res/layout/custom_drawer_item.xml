@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/userLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightLarge"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/listview_background_igotit"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="6dp" >
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="3dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:baselineAlignBottom="@bool/abs__action_bar_embed_tabs"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_weight="7"
+            android:ellipsize="marquee"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/iGotIt_Gray_white"
+            android:textColorLink="@color/iGotIt_Gray_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/itemLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:background="@drawable/listview_background_igotit"
+        android:orientation="horizontal"
+        android:padding="6dp" >
+
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="3dp"
+            android:layout_marginRight="4dp"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="marquee"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/iGotIt_Gray_white"
+            android:textColorLink="@color/iGotIt_Gray_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/userLayout"
+        android:background="@color/iGotIt_Gray_light" />
+
+</RelativeLayout>
