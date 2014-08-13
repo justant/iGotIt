@@ -13,7 +13,6 @@ import com.example.igotit.R;
 
 public class FragmentMyCourse extends Fragment {
 	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

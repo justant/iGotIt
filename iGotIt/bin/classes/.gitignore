@@ -1,5 +1,3 @@
 /com/
-/database/
+/.gitignore
 /fragments/
-/main/
-/singleton/
