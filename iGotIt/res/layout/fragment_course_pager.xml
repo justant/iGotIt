@@ -6,16 +6,16 @@
     android:layout_height="match_parent" >
 
     <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/mycourse_tabs"
+        android:id="@+id/course_tabs"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeightSmall"
         android:background="@color/iGotIt_Gray_lightlight" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/mycourse_pager"
+        android:id="@+id/course_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mycourse_tabs"
+        android:layout_below="@+id/course_tabs"
         tools:context=".MainActivity" />
 
 </RelativeLayout>

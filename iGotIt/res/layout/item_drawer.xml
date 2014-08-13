@@ -22,7 +22,8 @@
             android:layout_marginRight="4dp"
             android:layout_weight="1"
             android:baselineAlignBottom="@bool/abs__action_bar_embed_tabs"
-            android:paddingLeft="2dp" />
+            android:paddingLeft="2dp"
+            android:paddingRight="0dp" />
 
         <TextView
             android:id="@+id/user_name"
@@ -31,6 +32,7 @@
             android:layout_weight="7"
             android:ellipsize="marquee"
             android:paddingLeft="10dp"
+            android:paddingRight="0dp"
             android:singleLine="true"
             android:textColor="@color/iGotIt_Gray_white"
             android:textColorLink="@color/iGotIt_Gray_white"
@@ -53,7 +55,8 @@
             android:layout_height="fill_parent"
             android:layout_margin="3dp"
             android:layout_marginRight="4dp"
-            android:paddingLeft="2dp" />
+            android:paddingLeft="2dp"
+            android:paddingRight="0dp" />
 
         <TextView
             android:id="@+id/item_name"
@@ -62,6 +65,7 @@
             android:layout_gravity="center_vertical"
             android:ellipsize="marquee"
             android:paddingLeft="10dp"
+            android:paddingRight="0dp"
             android:singleLine="true"
             android:textColor="@color/iGotIt_Gray_white"
             android:textColorLink="@color/iGotIt_Gray_white"

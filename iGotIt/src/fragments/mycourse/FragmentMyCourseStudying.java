@@ -14,7 +14,7 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_mycourse, container, false);
+		View view = inflater.inflate(R.layout.fragment_course, container, false);
 
 		return view;
 	}

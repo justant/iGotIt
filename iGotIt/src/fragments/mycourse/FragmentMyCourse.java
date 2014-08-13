@@ -22,16 +22,16 @@ public class FragmentMyCourse extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_mycourse_pager, container, false);
+		return inflater.inflate(R.layout.fragment_course_pager, container, false);
 	}
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) view.findViewById(R.id.mycourse_tabs);
-		ViewPager pager = (ViewPager) view.findViewById(R.id.mycourse_pager);
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+		PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) view.findViewById(R.id.course_tabs);
+		ViewPager pager = (ViewPager) view.findViewById(R.id.course_pager);
+		MyCourseViewPagerAdapter adapter = new MyCourseViewPagerAdapter(getChildFragmentManager());
 		pager.setAdapter(adapter);
 		tabs.setViewPager(pager);
 		

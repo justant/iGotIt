@@ -77,7 +77,7 @@ public class MainActivity extends SherlockFragmentActivity{
 		dataList.add(new DrawerItem("Support", R.drawable.ic_drawer_preferences));
 		dataList.add(new DrawerItem("Logout", R.drawable.ic_drawer_preferences));
 
-		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item, dataList);
+		adapter = new CustomDrawerAdapter(this, R.layout.item_drawer, dataList);
 		
 		// Set the MenuListAdapter to the ListView
 		mDrawerList.setAdapter(adapter);

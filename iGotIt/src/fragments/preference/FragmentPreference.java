@@ -16,7 +16,7 @@ public class FragmentPreference extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
 
-          View view = inflater.inflate(R.layout.fragment_coursedirectory, container, false);
+          View view = inflater.inflate(R.layout.fragment_preference, container, false);
 
           return view;
     }
