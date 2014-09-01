@@ -31,6 +31,7 @@ import fragments.preference.FragmentPreference;
 @SuppressLint("ResourceAsColor")
 public class MainActivity extends SherlockFragmentActivity{
 	public static String TAG = "MainActivity";	
+	LoginActivity sd;
 	
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;

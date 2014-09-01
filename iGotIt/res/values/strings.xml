@@ -2,8 +2,10 @@
 <resources>
 
     <string name="app_name">iGotIt</string>
+    <string name="app_id">1446375645635202</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
     <string name="action_settings">Settings</string>
 
+     
 </resources>
