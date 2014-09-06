@@ -1,7 +1,6 @@
 package singleton;
 
 import android.util.Log;
-import com.facebook.widget.ProfilePictureView;
 
 public class Utility {
 	private static final String TAG = "Singleton Utility";
@@ -19,8 +18,6 @@ public class Utility {
 	private String facebook_name;
 	// 페이스북 사용자 메일
 	private String facebook_email;
-	// 페이스북 프로필 사진
-	private ProfilePictureView facebook_profilePicture;
 	// tts 음높이
 	private String preference_ttsPitch;
 	// tts 빠르기
@@ -45,13 +42,6 @@ public class Utility {
 	}
 	public void setFacebook_email(String facebook_email) {
 		this.facebook_email = facebook_email;
-	}
-	public ProfilePictureView getFacebook_profilePicture() {
-		return facebook_profilePicture;
-	}
-	public void setFacebook_profilePicture(
-			ProfilePictureView facebook_profilePicture) {
-		this.facebook_profilePicture = facebook_profilePicture;
 	}
 	public String getPreference_ttsPitch() {
 		return preference_ttsPitch;

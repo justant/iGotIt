@@ -7,19 +7,25 @@ public class DrawerItem {
 	String itemName;
 	int imgResID;
 	
+	// 이 생성자는 test 입니다.
+	public DrawerItem() {
+		this.userName = "test";
+		this.itemName = "test";
+		this.imgResID = R.drawable.ic_user;
+	}
+	
+	public DrawerItem(String userName, String itemName, int imgResId) {
+		this.userName = "Min Soyoung";
+		this.itemName = null;
+		this.imgResID = R.drawable.ic_user;
+	}
+	
 	public DrawerItem(String itemName, int imgResID) {
-		super();
 		this.userName = null;
 		this.itemName = itemName;
 		this.imgResID = imgResID;
 	}
 	
-	public DrawerItem() {
-		this.userName = "Min Soyoung";
-		this.itemName = null;
-		this.imgResID = R.drawable.ic_user;
-	}
-
 	public String getItemName() {
 		return itemName;
 	}

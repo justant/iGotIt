@@ -2,26 +2,27 @@ package main;
 
 import java.util.List;
 
-import com.example.igotit.R;
-
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem>{
-	Context context;
-	List<DrawerItem> drawerItemList;
-	int layoutResID;
-	Typeface fontType;
+import com.example.igotit.R;
 
+public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem>{
+	private Context context;
+	private List<DrawerItem> drawerItemList;
+	private Typeface fontType;
+	private int layoutResID;
+	
 	public CustomDrawerAdapter(Context context, int layoutResID,List<DrawerItem> listItems) {
 		super(context, layoutResID, listItems);
 		this.context = context;
@@ -63,14 +64,14 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem>{
 		DrawerItem dItem = (DrawerItem) this.drawerItemList.get(position);
 
 		// user drawer
-		if (dItem.getUserName() == "Min Soyoung") {
+		if (dItem.getUserName() != null) {
 			drawerHolder.userLayout.setVisibility(LinearLayout.VISIBLE);
 			drawerHolder.itemLayout.setVisibility(LinearLayout.GONE);
 
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(180, 180);
 			drawerHolder.userIcon.setLayoutParams(layoutParams);
-			drawerHolder.userIcon.setImageDrawable(view.getResources().getDrawable(dItem.getImgResID()));
-			
+			///drawerHolder.userIcon.setImageDrawable(view.getResources().getDrawable(dItem.getImgResID()));
+			//drawerHolder.userIcon.setImageBitmap(new DownloadProfileTask().execute());
 			drawerHolder.userName.setText(dItem.getUserName());
 		} 
 		

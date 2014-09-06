@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import singleton.Utility;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -31,7 +32,7 @@ import fragments.preference.FragmentPreference;
 @SuppressLint("ResourceAsColor")
 public class MainActivity extends SherlockFragmentActivity{
 	public static String TAG = "MainActivity";	
-	LoginActivity sd;
+	private Utility utility = Utility.getInstance();
 	
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -68,7 +69,7 @@ public class MainActivity extends SherlockFragmentActivity{
 		dataList = new ArrayList<DrawerItem>();
 		
 		// Drawer User
-		dataList.add(new DrawerItem());
+		dataList.add(new DrawerItem(utility.getFacebook_name(), null, 0));
 		
 		// Drawer Item
 		dataList.add(new DrawerItem("Home", R.drawable.ic_drawer_home));
