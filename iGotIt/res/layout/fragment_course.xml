@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-?android:attr/listPreferredItemHeightSmall
+
     <ListView
         android:id="@+id/courseListView"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:clickable="false"
+		android:divider="@drawable/list_divider"
+		android:dividerHeight="3dp"
+		android:drawSelectorOnTop="false"
+		android:padding="2dp" >
+		
     </ListView>
 
 </RelativeLayout>

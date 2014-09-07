@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/course_itemLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/listview_background"
+    android:orientation="horizontal"
+    android:padding="6dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2" >
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_margin="3dp"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:layout_weight="0.2"
+                android:maxLines="1"
+                android:text="Small Text"
+                android:textSize="20dip"
+                flatui:fl_textColor="main"
+                flatui:fl_theme="@array/orange" />
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="3dp"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:layout_weight="1.8"
+                android:maxLines="1"
+                android:text="Small Text"
+                android:textSize="20dip"
+                flatui:fl_textColor="main"
+                flatui:fl_theme="@array/orange" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="vertical"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip" >
+
+            <com.cengalabs.flatui.views.FlatSeekBar
+                android:id="@+id/seekbar1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:max="100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3.3" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1.3"
+                android:orientation="vertical"
+                android:weightSum="1" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/ic_user" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2" >
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:gravity="bottom|left"
+                    android:text="Medium Text"
+                    android:textSize="20dip"
+                    flatui:fl_textColor="main"
+                	flatui:fl_theme="@array/orange" />
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:layout_weight="1"
+                    android:gravity="top|left"
+                    android:text="Medium Text"
+                    android:textSize="20dip"
+                    flatui:fl_textColor="main"
+                    flatui:fl_theme="@array/orange" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="0dp"
+                android:weightSum="1" >
+
+                <com.cengalabs.flatui.views.FlatButton
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:descendantFocusability="blocksDescendants"
+                    android:text="Button"
+                    flatui:fl_textAppearance="light" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
