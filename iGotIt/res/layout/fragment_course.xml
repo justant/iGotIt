@@ -7,7 +7,7 @@
     android:orientation="horizontal" >
 
     <ListView
-        android:id="@+id/courseListView"
+        android:id="@+id/studyListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:clickable="false"

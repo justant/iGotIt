@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,28 +16,34 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.igotit.R;
 
+import fragments.study.Constants;
+import fragments.study.ImageGridFragment;
+import fragments.study.SimpleImageActivity;
+import fragments.study.StudyActivity;
+
 
 public class FragmentMyCourseStudying extends SherlockFragment {
-	private List<MyCourseListItems> listItems;
+	private static final String TAG = "FragmentMyCourseStudying";
+	
+	private List<MyCourseListItem> listItems;
 	private ListView listView; 
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		listItems = new ArrayList<MyCourseListItems>();
+		listItems = new ArrayList<MyCourseListItem>();
 		 
 		for (int i = 0; i < 10; i++) {
-			MyCourseListItems item = new MyCourseListItems();
+			MyCourseListItem item = new MyCourseListItem();
 			listItems.add(item);
 		}
 		
 		View view = inflater.inflate(R.layout.fragment_course, container, false);
-		listView = (ListView) view.findViewById(R.id.courseListView);
+		listView = (ListView) view.findViewById(R.id.studyListView);
 		listView.setAdapter(new MyCourseAdapter(getActivity(), listItems));
 		
 		return view;
@@ -47,10 +54,10 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 	
 	class MyCourseAdapter extends BaseAdapter{
 		private Context context;
-		private List<MyCourseListItems> listItems;
+		private List<MyCourseListItem> listItems;
 		private ViewHolder viewHolder = null;
 		
-		MyCourseAdapter(Context context, List<MyCourseListItems> listItems){
+		MyCourseAdapter(Context context, List<MyCourseListItem> listItems){
 			this.context = context;
 			this.listItems = listItems;
 		}
@@ -80,7 +87,7 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 	            convertView = mInflater.inflate(R.layout.item_mycourse, null);
 	            
 	            viewHolder = new ViewHolder();
-	            viewHolder.tv1 = (TextView)convertView.findViewById(R.id.textView1);
+	            viewHolder.tv1 = (TextView)convertView.findViewById(R.id.test1);
 	            viewHolder.tv2 = (TextView)convertView.findViewById(R.id.textView2);
 	            viewHolder.tv3 = (TextView)convertView.findViewById(R.id.textView3);
 	            viewHolder.tv4 = (TextView)convertView.findViewById(R.id.textView4);
@@ -88,7 +95,6 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 	            viewHolder.iv1 = (ImageView)convertView.findViewById(R.id.imageView1);
 	            viewHolder.btn1 = (Button)convertView.findViewById(R.id.button1);
 	            //viewHolder.btn1.setFocusable(false);;
-	            
 	            convertView.setTag(viewHolder);	           
 			}else {
 				viewHolder = (ViewHolder)convertView.getTag();
@@ -115,8 +121,14 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 		             
 		            // 버튼 클릭
 		            case R.id.button1:
-					Toast.makeText(context, "버튼 Tag = " + v.getTag(),
-							Toast.LENGTH_SHORT).show();
+//					Toast.makeText(context, "버튼 Tag = " + v.getTag(),
+//							Toast.LENGTH_SHORT).show();
+		            	Intent intent = new Intent(context, StudyActivity.class);
+		            	startActivity(intent);
+//		            	Intent intent = new Intent(context, SimpleImageActivity.class);
+//		        		intent.putExtra(Constants.Extra.FRAGMENT_INDEX, ImageGridFragment.INDEX);
+//		        		startActivity(intent);
+		        		
 		                break;
 		 
 		            default:

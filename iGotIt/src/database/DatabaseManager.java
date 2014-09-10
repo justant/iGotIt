@@ -112,7 +112,7 @@ public class DatabaseManager {
 	// tableName의 모든 DB를 fetch한다.
 	public Cursor fetchAll(String tableName) {
 		Log.v(TAG, " fetchAll data , tableName : " + tableName);
-		return mDB.rawQuery("SELECT * FROM " + tableName, null);
+		return mDB.rawQuery("SELECT * FROM '" + tableName  + "'", null);
 	}
 
 }

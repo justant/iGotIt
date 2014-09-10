@@ -20,7 +20,7 @@
             android:weightSum="2" >
 
             <com.cengalabs.flatui.views.FlatTextView
-                android:id="@+id/textView1"
+                android:id="@+id/test1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
@@ -139,7 +139,8 @@
                     android:layout_height="45dp"
                     android:descendantFocusability="blocksDescendants"
                     android:text="Button"
-                    flatui:fl_textAppearance="light" />
+                    flatui:fl_textAppearance="light"
+					flatui:fl_theme="@array/orange" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
