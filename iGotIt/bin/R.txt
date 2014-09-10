@@ -883,6 +883,8 @@ int id fl_light 0x7f04000b
 int id fl_main 0x7f04000a
 int id flat 0x7f040003
 int id grid 0x7f040064
+int id grid_mean 0x7f040063
+int id grid_word 0x7f040062
 int id homeAsUp 0x7f040014
 int id image 0x7f040074
 int id imageView1 0x7f040079
@@ -917,8 +919,6 @@ int id test1 0x7f040076
 int id textView2 0x7f040077
 int id textView3 0x7f04007a
 int id textView4 0x7f04007b
-int id title_edittexts1 0x7f040062
-int id title_edittexts2 0x7f040063
 int id transparent 0x7f040005
 int id ttt1 0x7f04007e
 int id ttt2 0x7f04007f
