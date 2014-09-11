@@ -33,5 +33,7 @@
 
 	<!-- Content descriptions -->
 	<string name="descr_image">Image</string>
+	
+	<string name="network_error">Network not available without internet this app does not work</string>
      
 </resources>
