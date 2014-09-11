@@ -1,5 +1,7 @@
 package singleton;
 
+import image.google.GoogleImage;
+
 import java.util.ArrayList;
 
 import fragments.study.Words;
@@ -28,11 +30,10 @@ public class Utility {
 	private String preference_timeLimit;
 	
 	// 테이블에 접근한 모든 이미지학습할 데이터
-	private ArrayList<Words> wordList;
-	// 학습할 데이터의 시작 지점
-	private int wordPosition;
-	// 시작지점으로부터 크기
-	private int wordSize;
+	private ArrayList<Words> chapterWordList = new ArrayList<Words>();
+	
+	// 이미지 연상학습에서 필요한 특정 단어가 가지고있는 origin url, thumnail url 과 같은 이미지정보
+	private ArrayList<GoogleImage> googleImageList = new ArrayList<GoogleImage>();
 
 	public String getFacebook_id() { return facebook_id; }
 	public void setFacebook_id(String facebook_id) { this.facebook_id = facebook_id; }
@@ -46,13 +47,9 @@ public class Utility {
 	public void setPreference_ttsRate(String preference_ttsRate) { this.preference_ttsRate = preference_ttsRate; }
 	public String getPreference_timeLimit() { return preference_timeLimit; }
 	public void setPreference_timeLimit(String preference_timeLimit) { this.preference_timeLimit = preference_timeLimit; }
-	public ArrayList<Words> getWordList() { return wordList; }
-	public void setWordList(ArrayList<Words> wordList) { this.wordList = wordList; }
-	public int getWordPosition() { return wordPosition; }
-	public void setWordPosition(int wordPosition) { this.wordPosition = wordPosition; }
-	public int getWordSize() { return wordSize; }
-	public void setWordSize(int wordSize) { this.wordSize = wordSize; }
-	
-	
+	public ArrayList<Words> getChapterWordList() { return chapterWordList; }
+	public void setChapterWordList(ArrayList<Words> chapterWordList) { this.chapterWordList = chapterWordList; }
+	public ArrayList<GoogleImage> getGoogleImageList() { return googleImageList; }
+	public void setGoogleImageList(ArrayList<GoogleImage> googleImageList) { this.googleImageList = googleImageList; }
 	
 }
