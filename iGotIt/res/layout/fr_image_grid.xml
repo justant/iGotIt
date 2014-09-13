@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/course_itemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/listview_background"
+    android:orientation="vertical"
+    android:padding="6dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="0.01"
+        android:orientation="vertical"
+        android:weightSum="2" >
+
+        <com.cengalabs.flatui.views.FlatTextView
+            android:id="@+id/grid_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="단어(발음기호)"
+            android:textSize="20dip"
+            flatui:fl_textColor="main"
+            flatui:fl_theme="@array/orange" />
+        
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            style="@style/Scroll.Horizontal.Igotit">
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:id="@+id/grid_mean"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="단어 뜻"
+                android:textSize="20dp"
+                flatui:fl_textColor="main"
+                flatui:fl_theme="@array/orange" />
+            
+        </HorizontalScrollView>
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/study_grid_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.98"
+        android:orientation="vertical" >
+
+        <GridView
+            android:id="@+id/study_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:horizontalSpacing="4dip"
+            android:numColumns="3"
+            android:padding="4dip"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="4dip"
+            style="@style/Scroll.Vertical.Igotit">
+        </GridView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="0.01"
+        android:weightSum="2" >
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="Skip"
+            flatui:fl_textAppearance="light"
+            flatui:fl_theme="@array/grass"/>
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/btn_igotit"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="iGotIt"
+            flatui:fl_textAppearance="light"
+            flatui:fl_theme="@array/orange" />
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/loading_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/list_loader"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/footer_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/list_loader"
+        android:visibility="gone" />
+
+</LinearLayout>
