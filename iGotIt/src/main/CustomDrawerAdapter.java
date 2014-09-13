@@ -2,6 +2,7 @@ package main;
 
 import java.util.List;
 
+import singleton.Utility;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,8 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.igotit.R;
+import com.squareup.picasso.Picasso;
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem>{
+	private static final String TAG = "CustomDrawerAdapter";
+	private Utility utility = Utility.getInstance();
 	private Context context;
 	private List<DrawerItem> drawerItemList;
 	private Typeface fontType;
@@ -70,8 +74,14 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem>{
 
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(180, 180);
 			drawerHolder.userIcon.setLayoutParams(layoutParams);
-			///drawerHolder.userIcon.setImageDrawable(view.getResources().getDrawable(dItem.getImgResID()));
-			//drawerHolder.userIcon.setImageBitmap(new DownloadProfileTask().execute());
+			
+			String url = "https://graph.facebook.com/" + utility.getFacebook_id() + "/picture?type=large";
+			Picasso.with(context)
+	        .load(url)
+	        .resize(180, 180)
+	        .centerCrop()
+	        .into(drawerHolder.userIcon);
+			
 			drawerHolder.userName.setText(dItem.getUserName());
 		} 
 		

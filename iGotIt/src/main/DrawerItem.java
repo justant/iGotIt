@@ -15,9 +15,9 @@ public class DrawerItem {
 	}
 	
 	public DrawerItem(String userName, String itemName, int imgResId) {
-		this.userName = "Min Soyoung";
-		this.itemName = null;
-		this.imgResID = R.drawable.ic_user;
+		this.userName = userName;
+		this.itemName = itemName;
+		this.imgResID = imgResId;
 	}
 	
 	public DrawerItem(String itemName, int imgResID) {
