@@ -27,7 +27,7 @@ import com.example.igotit.R;
 import fragments.coursedirectory.FragmentCourseDirectory;
 import fragments.home.FragmentHome;
 import fragments.mycourse.FragmentMyCourse;
-import fragments.preference.FragmentPreference;
+import fragments.newspaper.FragmentNewspaper;
 
 @SuppressLint("ResourceAsColor")
 public class MainActivity extends SherlockFragmentActivity{
@@ -75,7 +75,7 @@ public class MainActivity extends SherlockFragmentActivity{
 		dataList.add(new DrawerItem("Home", R.drawable.ic_drawer_home));
 		dataList.add(new DrawerItem("My Courses", R.drawable.ic_drawer_course));
 		dataList.add(new DrawerItem("Course Directory", R.drawable.ic_drawer_preferences));
-		dataList.add(new DrawerItem("Preferences", R.drawable.ic_drawer_preferences));
+		dataList.add(new DrawerItem("Newspaper", R.drawable.ic_drawer_preferences));
 		dataList.add(new DrawerItem("Support", R.drawable.ic_drawer_preferences));
 		dataList.add(new DrawerItem("Logout", R.drawable.ic_drawer_preferences));
 
@@ -192,7 +192,7 @@ public class MainActivity extends SherlockFragmentActivity{
 			break;
 			
 		case 4:
-			fragment = new FragmentPreference();
+			fragment = new FragmentNewspaper();
 			break;
 			
 		case 5:

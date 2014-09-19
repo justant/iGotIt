@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_wordmean_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/textview_wordmean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="fill_horizontal"
+            android:text="wordmean"
+            android:textIsSelectable="true"
+            android:textSize="20sp" />
+    </ScrollView>
+</RelativeLayout>

@@ -2,6 +2,7 @@ package database;
 
 import java.io.IOException;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -74,45 +75,59 @@ public class DatabaseManager {
 	// delete 구현
 	
 	// update 구현
-	public void update(String tableName, String[] fields, String[] values) {
+	
+	public void update(String tableName, String[] fields, String[] values, int whereId) {
 		// 필드와 값의 갯수가 같지 않으면 오류 발생
 		if(fields.length != values.length){
 			Log.v(TAG, "update : fields.length is not equal to values.length");
 			return;
 		}
 		
+		// field + value
 		int i;
-		String sql = "UPDATE " + tableName + " SET ";
+		String sql = "UPDATE '" + tableName + "' SET ";
+		
 		for(i = 0; i<fields.length - 1; i++){
 			sql += fields[i] + " = '" + values[i] + "', ";
 		}
 		sql += fields[i] + " = '" + values[i] + "'";
-		mDB.execSQL(sql);
+		
+		// where
+		sql += " WHERE _id = '" + whereId + "'";
 		
 		Log.v(TAG, "update sql = " + sql);
+		mDB.execSQL(sql);
 	}
-	
-	public void update(String tableName, String[] fields, String[] values, String where) {
-	
-	}
-		
-		
-		
-//		if (tableName.equals("word") && fieldNumber == 4) {
-//			/* fields[0] = word_ID, fields[1] = knowlevel, fields[2] = knowtime, fields[3] = knowfile */
-//			Log.v(TAG, "SQL(UPDATE) TABLE NAME = " + tableName + "fields[0]="+fields[0]+", fields[1]="+fields[1]+", fields[2]="+fields[2]+", fields[3]="+fields[3]);
-//			mDB.execSQL("UPDATE " + tableName + " SET " + "knowlevel='" + Integer.parseInt(fields[1])
-//						+ "', knowtime='" + fields[2] + "', knowfile='" + fields[3] + "' " + "WHERE word_ID=" + fields[0]);
-//		
-//		}	
-	 
 	
 	// fetch
-	
 	// tableName의 모든 DB를 fetch한다.
 	public Cursor fetchAll(String tableName) {
 		Log.v(TAG, " fetchAll data , tableName : " + tableName);
 		return mDB.rawQuery("SELECT * FROM '" + tableName  + "'", null);
+	}
+	
+	// tableName의 모든 DB를 fetch한다.
+	public Cursor fetch(String tableName, int whereStart, int whereEnd) {
+		Log.v(TAG, " fetchAll data , tableName : " + tableName);
+		return mDB.rawQuery("SELECT * FROM '" + tableName  + "'"
+				+ " WHEHE " + whereStart + " <= _id AND _id <= " + whereEnd, null);
+	}
+	
+	
+	////////////////////////////////////////
+	// TEST ////////////////////////////////
+	////////////////////////////////////////
+
+	/* word_dic 테이블에 있는 mead을 fetch */
+	public Cursor fetchDicMean(String tableName, String word){
+		Log.v(TAG, "fetchDicMean = SELECT mean FROM " + tableName + " WHERE word = " + word);
+		return mDB.rawQuery("SELECT mean FROM " + tableName + " WHERE word = '" + word + "'", null);
+	}
+	
+	/* word테이블에 있는 knowtime != 0 이 아닌 단어들만 SELECT */
+	public Cursor fetchKnowWord(){
+		Log.v(TAG, " fetchKnowWord");
+		return mDB.rawQuery("SELECT word FROM word WHERE knowlevel > 0", null);
 	}
 
 }

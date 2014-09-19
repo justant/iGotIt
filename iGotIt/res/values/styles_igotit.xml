@@ -66,7 +66,7 @@
     </style>
     
     <style name="ProgressBar.Igotit" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/progress_horizontal_igotit</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal_slim</item>
     </style>
     
     <style name="ActionButton.CloseMode.Igotit" parent="@style/Widget.Sherlock.ActionButton.CloseMode">

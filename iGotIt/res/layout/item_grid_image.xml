@@ -12,11 +12,11 @@
 		android:scaleType="centerCrop" />
 
 	<ProgressBar
-		android:id="@+id/progress"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:indeterminate="false"
-		android:max="100"
-		android:layout_gravity="center"
-		android:progressDrawable="@drawable/progress_horizontal_igotit" />
+	    android:id="@+id/progress"
+	    android:layout_width="30dp"
+	    android:layout_height="30dp"
+	    android:layout_gravity="center"
+	    android:indeterminate="false"
+	    android:max="100" />
+
 </FrameLayout>

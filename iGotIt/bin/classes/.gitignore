@@ -1,4 +1,5 @@
 /com/
 /.gitignore
-/database/
 /fragments/
+/database/
+/main/

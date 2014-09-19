@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 // 학습할 단어가 넘어오면 이 단어의 Image Url을 만들어서 ImageGridFragment/ImagePagerFragment로 넘겨준다
 
 public class SimpleImageActivity extends FragmentActivity {
+	public static final String TAG = "SimpleImageActivity";
 	private Utility utility = Utility.getInstance();
 	private int fragmentIndex;
 	
@@ -53,5 +55,24 @@ public class SimpleImageActivity extends FragmentActivity {
 
 		setTitle(titleRes);
 		getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment, tag).commit();
+	}
+
+	public void returnIntent(){
+		Log.v(TAG, "returnIntent");
+		Intent returnIntent = new Intent();
+		setResult(RESULT_OK, returnIntent);
+		finish();
+	}
+	
+	@Override
+	public void finish() {
+		super.finish();
+	}
+	
+	@Override
+	public void onBackPressed(){
+		returnIntent();
+		Log.v(TAG, "onBackPressed()");
+		super.onBackPressed();		
 	}
 }

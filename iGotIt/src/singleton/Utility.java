@@ -52,4 +52,36 @@ public class Utility {
 	public ArrayList<GoogleImage> getGoogleImageList() { return googleImageList; }
 	public void setGoogleImageList(ArrayList<GoogleImage> googleImageList) { this.googleImageList = googleImageList; }
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	// TEST //
+	/*서버 쓰레드 관리 flag */
+	private boolean articleListDown = false;
+	private boolean articleDown = false;
+	private boolean lyricListDown = false;
+	private boolean lyricDown = false;
+	private boolean sentenceListDown = false;
+	private boolean sentenceDown = false;
+	private boolean imageURLDown = false;
+	
+	public boolean isArticleListDown() { return articleListDown; }
+	public void setArticleListDown(boolean articleListDown) { this.articleListDown = articleListDown; }
+	public boolean isArticleDown() { return articleDown; }
+	public void setArticleDown(boolean articleDown) { this.articleDown = articleDown; }
+	public boolean isLyricListDown() { return lyricListDown; }
+	public void setLyricListDown(boolean lyricListDown) { this.lyricListDown = lyricListDown; }
+	public boolean isLyricDown() { return lyricDown; }
+	public void setLyricDown(boolean lyricDown) { this.lyricDown = lyricDown; }
+	public boolean isSentenceListDown() { return sentenceListDown; }
+	public void setSentenceListDown(boolean sentenceListDown) {	this.sentenceListDown = sentenceListDown; }
+	public boolean isSentenceDown() { return sentenceDown; }
+	public void setSentenceDown(boolean sentenceDown) {	this.sentenceDown = sentenceDown; }
+	public boolean isImageURLDown() { return imageURLDown; }
+	public void setImageURLDown(boolean imageURLDown) { this.imageURLDown = imageURLDown; }
 }

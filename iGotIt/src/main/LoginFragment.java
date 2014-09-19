@@ -223,7 +223,7 @@ public class LoginFragment extends Fragment {
 	private void saveDatabase(String tableName, String fields[], String values[]){
 		Log.v(TAG, "saveDatabase()");
 		dbAdapter.open();
-		dbAdapter.update(tableName, fields, values);
+		dbAdapter.update(tableName, fields, values, 1);
 		dbAdapter.close();
 	}
 	

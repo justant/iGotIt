@@ -33,7 +33,7 @@
             android:text="단어(발음기호)"
             android:textSize="20dip"
             flatui:fl_textColor="main"
-            flatui:fl_theme="@array/orange" />
+            flatui:fl_theme="@array/deep" />
         
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:text="단어 뜻"
                 android:textSize="20dp"
                 flatui:fl_textColor="main"
-                flatui:fl_theme="@array/orange" />
+                flatui:fl_theme="@array/dark" />
             
         </HorizontalScrollView>
 </LinearLayout>

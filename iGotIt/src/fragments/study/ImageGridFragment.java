@@ -18,7 +18,9 @@ import singleton.Utility;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -61,7 +63,6 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 	public static final int INDEX = 1;
 	private static final String PAGE_KEY = "page";
     private static final String QUERY_KEY = "query";
-
     public static final String FOOTER_KEY = "show_footer";
     // request minimum 50 elements
     public static final int MIN_ITEMS = 50;
@@ -125,11 +126,13 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					// 일단은 ㄴㄴ
-					//startImagePagerActivity(position);
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// 일단은 ㄴㄴ
+				// startImagePagerActivity(position);
 			}
 		});
+		
 		return rootView;
 	}
 	
@@ -316,26 +319,65 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 			
 			case R.id.btn_skip:
 				Log.v(TAG, "btn_skip Click!");
-				//screenRefresh(++wordPosition);
+				stopCurrentTask();
+				utility.getChapterWordList().get(wordPosition).setLearn("0");
 				
-				ImageLoader.getInstance().stop();
-				getActivity().finish();
+				wordPosition = findNextPosition(wordPosition);
+				if(wordPosition != -1)screenRefresh(wordPosition);
+				else {
+					// 끝까지 돌았지만 더이상 외울게 없다.
+					finishFragment(getActivity());
+				}
+				
 				break;
 				
 			case R.id.btn_igotit:
 				Log.v(TAG, "btn_igotit Click!");
-				// 현재 받고있는 이미지들 모두 stop
-				ImageLoader.getInstance().stop();
-				// 현재 쓰레드에 남아있는 풀 모두 stop				
-				mExecutor.shutdownNow();
-				mExecutor = Executors.newSingleThreadExecutor();
-		        mHandler.removeCallbacksAndMessages(null);
+				stopCurrentTask();
+				utility.getChapterWordList().get(wordPosition).setLearn("1");
 				
-				screenRefresh(++wordPosition);
+				wordPosition = findNextPosition(wordPosition);
+				if(wordPosition != -1)screenRefresh(wordPosition);
+				else {
+					// 끝까지 돌았지만 더이상 외울게 없다.
+					finishFragment(getActivity());
+					
+				}
+				
 				break;			
 			}
 		}
 	};
+	
+	// fragment 종료
+	public void finishFragment(Activity act){
+		Intent returnIntent = new Intent();
+		act.setResult(act.RESULT_OK, returnIntent);
+		act.finish();
+	}
+	
+	// 다음 외울 단어의 위치를 찾아준다.
+	public int findNextPosition(int pos){
+		int i;
+		for(i = pos + 1; i < utility.getChapterWordList().size(); i++){
+			// learn 상태가 "0" 일때 break
+			if(utility.getChapterWordList().get(i).getLearn().equals("0"))break;
+		}
+		// 모두 외운 상태라면
+		if(i == utility.getChapterWordList().size()) return -1;
+		
+		return i;
+	}
+	
+	// 사용중인 쓰레드, 핸들러 모두 종료
+	public void stopCurrentTask(){
+		// 현재 받고있는 이미지들 모두 stop
+		ImageLoader.getInstance().stop();
+		// 현재 쓰레드에 남아있는 풀 모두 stop				
+		mExecutor.shutdownNow();
+		mExecutor = Executors.newSingleThreadExecutor();
+        mHandler.removeCallbacksAndMessages(null);
+	}
 	
 	public void getImageUrlInformation(String word){
 		utility.getGoogleImageList().clear();
@@ -407,6 +449,9 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
         this.imageAdapter = null;
         this.mExecutor.shutdownNow();
         mHandler.removeCallbacksAndMessages(null);
+        // tts 종료
+ 		mTTS.stop();
+ 		mTTS.shutdown();
     }
     
 	@Override
