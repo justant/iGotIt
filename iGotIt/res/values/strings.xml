@@ -13,8 +13,10 @@
 	<string name="ac_name_image_list">Image List Example</string>
 	<string name="ac_name_image_grid">Image Grid Example</string>
 	<string name="ac_name_image_pager">Image Pager Example</string>
+	<string name="ac_name_image_speech">Image Speech Example</string>
 	<string name="ac_name_image_gallery">Image Gallery Example</string>
 	<string name="ac_name_complex">Complex Example</string>
+	
 	<!-- Labels -->
 	<string name="label_examples">Examples</string>
 	<string name="button_image_list">ListView</string>
@@ -35,5 +37,15 @@
 	<string name="descr_image">Image</string>
 	
 	<string name="network_error">Network not available without internet this app does not work</string>
+	
+	<!-- Recorder UI states -->
+    <string name="touch_mic_to_start">Touch the microphone\nto start recording</string>
+    <string name="stop">Stop</string>
+    <string name="state_recording">Recording…</string>
+    <string name="no_recordings">No recordings</string>
+    
+	<!-- Recorder Errors -->
+    <string name="failed_to_create_dir">Failed to create directory where recordings will be saved</string>
+    <string name="file_not_found">Recording not found, removing from list</string>
      
 </resources>

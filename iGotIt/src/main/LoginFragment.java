@@ -60,6 +60,7 @@ public class LoginFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    Log.v(TAG, "onCreate");
+	    utility.setLoginFramgnet(this);
 	    
 	    uiHelper = new UiLifecycleHelper(getActivity(), callback);
 	    uiHelper.onCreate(savedInstanceState);
@@ -295,6 +296,24 @@ public class LoginFragment extends Fragment {
 			}
 		}).start();
 	}
+	
+	// 로그 아우
+	public void callFacebookLogout(Context context) {
+	    Session session = Session.getActiveSession();
+	    if (session != null) {
+	 
+	        if (!session.isClosed()) {
+	            session.closeAndClearTokenInformation();
+	            //clear your preferences if saved 
+	        } 
+	    } else { 
+	        session = new Session(context);
+	        Session.setActiveSession(session);
+	 
+	        session.closeAndClearTokenInformation();
+	            //clear your preferences if saved 
+	    } 
+	} 
 }
 
 //try {

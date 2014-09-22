@@ -5,6 +5,7 @@ import java.util.List;
 
 import singleton.Utility;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -116,6 +117,27 @@ public class MainActivity extends SherlockFragmentActivity{
 		SelectItem(1);
 	}
 	
+	
+	// 뒤로가기 버튼을 눌렀을때 전에 로그인  fragment 강제 종료
+	// 이것을 응용해서 나중에 강제 logout을 할 수 있음
+	public void forcedFinishLoginFragment(){
+		if(getFragmentManager().getBackStackEntryCount() == 0){
+			Log.v(TAG, "onBackPressed() 1");
+			this.finish();
+		}else {
+			Log.v(TAG, "onBackPressed() 2");
+			getFragmentManager().popBackStack();
+		}
+		
+		utility.getLoginFramgnet().getActivity().finish();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		forcedFinishLoginFragment();
+	};
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
@@ -203,6 +225,11 @@ public class MainActivity extends SherlockFragmentActivity{
 		case 6:
 			// Logout
 			Log.v(TAG, "MainActivity Logout");
+			Context context = utility.getLoginFramgnet().getActivity();
+			utility.getLoginFramgnet().callFacebookLogout(context);
+			
+			// fragment 강제 종료
+			forcedFinishLoginFragment();
 			return;
 		
 		default:
@@ -211,7 +238,6 @@ public class MainActivity extends SherlockFragmentActivity{
 		
 		FragmentManager fm = getSupportFragmentManager();
 		fm.beginTransaction().replace(R.id.container, fragment).commit();
-
 		
 		mDrawerList.setItemChecked(possition, true);
 		// Get the title followed by the position

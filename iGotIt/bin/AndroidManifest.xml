@@ -9,6 +9,8 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="19" />
@@ -29,10 +31,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name="fragments.study.StudyActivity" />
         <activity android:name="main.MainActivity" />
         <activity android:name="fragments.study.SimpleImageActivity" />
-        <activity android:name="fragments.study.StudyActivity" />
-       
+        <activity android:name="com.mohammadag.soundrecorder.activities.SpeechActivity" />
+        <service android:name="com.mohammadag.soundrecorder.RecordingService" />
+        <activity android:name="com.mohammadag.soundrecorder.activities.FragmentHolderActivity" />
+            
         <activity android:name="com.facebook.LoginActivity" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

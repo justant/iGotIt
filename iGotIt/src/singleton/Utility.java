@@ -4,6 +4,7 @@ import image.google.GoogleImage;
 
 import java.util.ArrayList;
 
+import main.LoginFragment;
 import fragments.study.Words;
 import android.util.Log;
 
@@ -31,10 +32,12 @@ public class Utility {
 	
 	// 테이블에 접근한 모든 이미지학습할 데이터
 	private ArrayList<Words> chapterWordList = new ArrayList<Words>();
-	
 	// 이미지 연상학습에서 필요한 특정 단어가 가지고있는 origin url, thumnail url 과 같은 이미지정보
 	private ArrayList<GoogleImage> googleImageList = new ArrayList<GoogleImage>();
 
+	// 로그인과 관련된 fragment
+	private LoginFragment loginFramgnet;
+	
 	public String getFacebook_id() { return facebook_id; }
 	public void setFacebook_id(String facebook_id) { this.facebook_id = facebook_id; }
 	public String getFacebook_name() { return facebook_name; }
@@ -51,6 +54,8 @@ public class Utility {
 	public void setChapterWordList(ArrayList<Words> chapterWordList) { this.chapterWordList = chapterWordList; }
 	public ArrayList<GoogleImage> getGoogleImageList() { return googleImageList; }
 	public void setGoogleImageList(ArrayList<GoogleImage> googleImageList) { this.googleImageList = googleImageList; }
+	public LoginFragment getLoginFramgnet() { return loginFramgnet; }
+	public void setLoginFramgnet(LoginFragment loginFramgnet) { this.loginFramgnet = loginFramgnet; }
 	
 	
 	
@@ -60,6 +65,8 @@ public class Utility {
 	
 	
 	
+	
+
 	// TEST //
 	/*서버 쓰레드 관리 flag */
 	private boolean articleListDown = false;

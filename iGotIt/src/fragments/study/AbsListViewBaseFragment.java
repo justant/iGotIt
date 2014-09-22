@@ -24,6 +24,7 @@ import android.widget.AbsListView;
 import com.example.igotit.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
 //import com.nostra13.universalimageloader.sample.Constants;
 //import com.nostra13.universalimageloader.sample.R;
 //import com.nostra13.universalimageloader.sample.activity.SimpleImageActivity;
@@ -81,6 +82,7 @@ public abstract class AbsListViewBaseFragment extends BaseFragment {
 		intent.putExtra(Constants.Extra.IMAGE_POSITION, position);
 		startActivity(intent);
 	}
+	
 
 	private void applyScrollListener() {
 		listView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), pauseOnScroll, pauseOnFling));

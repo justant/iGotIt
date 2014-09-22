@@ -46,6 +46,8 @@ public class LoginActivity extends FragmentActivity {
 	    } catch (Exception e) {
 	    	Log.v(TAG, "Exception e = " + e);
 	    }
+	    
+	    
 	}
 
 	@Override

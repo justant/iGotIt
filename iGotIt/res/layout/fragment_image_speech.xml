@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_study_speech"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/listview_background"
+    android:orientation="vertical"
+    android:padding="6dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="0.01"
+        android:orientation="vertical"
+        android:weightSum="2" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:weightSum="1" >
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:id="@+id/speech_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="단어(발음기호)"
+                android:textSize="20dip"
+                flatui:fl_textColor="main"
+                flatui:fl_theme="@array/deep" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:weightSum="1" >
+
+            <HorizontalScrollView
+                style="@style/Scroll.Horizontal.Igotit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1" >
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/speech_mean"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="단어 뜻"
+                    android:textSize="20dp"
+                    flatui:fl_textColor="main"
+                    flatui:fl_theme="@array/dark" />
+            </HorizontalScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.01"
+        android:background="@drawable/speech_card_background_white"
+        android:orientation="vertical"
+        android:weightSum="2" >
+
+        <RelativeLayout
+            android:id="@+id/time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/timer_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center"
+                android:text="00:0"
+                android:textSize="80sp" />
+
+            <fragments.study.speech.RecordingStateView
+                android:id="@+id/state_view"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/filename_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#ff4444"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="0.96"
+        android:orientation="vertical"
+        android:weightSum="2" >
+        
+        <TextView
+        android:id="@+id/recording_hint_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:textSize="22sp" />
+        
+	</LinearLayout>
+	
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="70dp"
+         android:layout_weight="0.01"
+         android:orientation="vertical"
+         android:weightSum="2" >
+        
+		<fragments.study.speech.MicrophoneLevelsView
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3" />
+         
+	</LinearLayout>
+    
+
+</LinearLayout>

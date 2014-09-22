@@ -11,9 +11,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -100,6 +98,7 @@ public class StudyActivity extends Activity {
 	public void onBackPressed() {
 		ImageLoader.getInstance().stop();
 		super.onBackPressed();
+		
 	}
 
 	// 단어정보를 가지고있는 고유의 테이블에 접근하여 DB정보를 불러온다.
@@ -128,7 +127,8 @@ public class StudyActivity extends Activity {
 		private List<StudyListItem> listItems = null;
 		private ViewHolder viewHolder = null;
 		private Context context = null;
-
+		private int progressMax;
+		private int progressCurrent;
 		StudyAdapter(Context context, List<StudyListItem> listItems) {
 			this.context = context;
 			this.inflater = LayoutInflater.from(context);
@@ -174,9 +174,9 @@ public class StudyActivity extends Activity {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			
-			viewHolder.tvTitle.setText(String.valueOf(listItems.get(position).getId() + 1));
-			int progressMax = listItems.get(position).getWordSize();
-			int progressCurrent = listItems.get(position).getLearn();
+			viewHolder.tvTitle.setText(String.valueOf(listItems.get(position).getTitle()));
+			progressMax = listItems.get(position).getWordSize();
+			progressCurrent = listItems.get(position).getLearn();
 			viewHolder.tvProgress.setText(String.valueOf((progressCurrent * 100) / progressMax) + "%");
 			viewHolder.tvWordSize.setText(String.valueOf(listItems.get(position).getWordSize()));
 			viewHolder.tvLearn.setText(String.valueOf(listItems.get(position).getLearn()));
@@ -200,28 +200,32 @@ public class StudyActivity extends Activity {
 				// Start 버튼 클릭
 				case R.id.btn_start:
 
-	            	// 버튼이 어떤 position의 버튼인지 구분한 값을 불러온다.
-					int position= (Integer)view.getTag();
-					Log.v(TAG, "setOnTouchListener position = "	+ position);
-		
-					// onImageGridClick
-					Intent intent = new Intent(context, SimpleImageActivity.class);
-					intent.putExtra(Constants.Extra.FRAGMENT_INDEX,	ImageGridFragment.INDEX);
-		
-					// 학습할 데이터들을 새롭게 set해준다.
-					utility.getChapterWordList().clear();
-					startPos = position * 100;
-					wordSize = listItems.get(position).getWordSize();
-		
-					for (int i = startPos; i < startPos + wordSize; i++) {
-						utility.getChapterWordList().add(
-								wordList.get(i));
-					}
-		
-					// request code 1 = gridFragment;
-					startActivityForResult(intent, 1);
+					if(progressCurrent < progressMax){
+						// 버튼이 어떤 position의 버튼인지 구분한 값을 불러온다.
+						int position= (Integer)view.getTag();
+						Log.v(TAG, "setOnTouchListener position = "	+ position);
+			
+						// onImageGridClick
+						Intent intent = new Intent(context, SimpleImageActivity.class);
+						intent.putExtra(Constants.Extra.FRAGMENT_INDEX,	ImageGridFragment.INDEX);
+			
+						// 학습할 데이터들을 새롭게 set해준다.
+						utility.getChapterWordList().clear();
+						startPos = position * 100;
+						wordSize = listItems.get(position).getWordSize();
+			
+						for (int i = startPos; i < startPos + wordSize; i++) {
+							utility.getChapterWordList().add(wordList.get(i));
+						}
+			
+						// request code 1 = gridFragment;
+						startActivityForResult(intent, ImageGridFragment.INDEX);
 
-					break;
+						break;
+					}else {
+						Log.v(TAG, " 모두 외웠습니다 ");
+						// 여기다가 다이얼로그 창을 띄워서 새로 초기화 할거냐고 사용자에게 물어본다.
+					}
 
 				default:
 					break;
@@ -244,19 +248,18 @@ public class StudyActivity extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		if (requestCode == 1) {
+		if (requestCode == ImageGridFragment.INDEX) {
 			if (resultCode == RESULT_OK) {
 
 				// chapterList에서 변경된 부분을 wordList에 반영한다
 				int cnt = 0;
 				for (int i = startPos; i < startPos + wordSize; i++) {
-					wordList.get(i).setLearn(
-							utility.getChapterWordList().get(cnt++).getLearn());
+					wordList.get(i).setLearn(utility.getChapterWordList().get(cnt++).getLearn());
 				}
 				// 학습이 끝난 후 DB에 학습정보를 저장한다. (startPos ~ endPos) 
 				// ( 0 ~ 99 ), ( 100 ~ 199) 100단위로 끊어진다.
 				updateDatabaseLearnState(vocabularyId, startPos, startPos + wordSize);
-				
+				updateDatabaseVocaInfo(vocabularyId);
 				// 리스트 아이템을 초기화해준다.
 				initListItems();
 				// view를 업데이트 해준다
@@ -267,12 +270,24 @@ public class StudyActivity extends Activity {
 			}
 		}
 	}
-
+	
+	// Mycourse 화면에서 보여줄 정보를 db에 업데이트 한다.
+	public void updateDatabaseVocaInfo(String tableName){
+		int learn = 0;
+		for(int i = 0; i < wordList.size(); i++){
+			if(wordList.get(i).getLearn() == "1") learn++;
+		}
+		String[] fields = { "learn" };
+		String values[] = { String.valueOf(learn) };
+		dbAdapter.open();
+		dbAdapter.update(tableName, fields, values, 1);
+		dbAdapter.close();
+	}
+	
+	// 어떤 단어를 외웠는지 db를 갱신한다.
 	public void updateDatabaseLearnState(String tableName, int whereStart,
 			int whereEnd) {
 		// _id 가 whereStart ~ whereEnd인 부분을 update
-		Log.v(TAG, "updateDatabaseLearnState() whereStart = " + whereStart);
-		Log.v(TAG, "updateDatabaseLearnState() whereEnd = " + whereEnd);
 
 		String[] fields = { "learn" };
 		int whereId;

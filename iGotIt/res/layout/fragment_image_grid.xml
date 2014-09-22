@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:flatui="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/course_itemLayout"
+    android:id="@+id/layout_study_grid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
@@ -13,61 +13,92 @@
     android:weightSum="1" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_weight="0.01"
         android:orientation="vertical"
         android:weightSum="2" >
 
-        <com.cengalabs.flatui.views.FlatTextView
-            android:id="@+id/grid_word"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="단어(발음기호)"
-            android:textSize="20dip"
-            flatui:fl_textColor="main"
-            flatui:fl_theme="@array/deep" />
-        
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            style="@style/Scroll.Horizontal.Igotit">
+            android:weightSum="1" >
 
             <com.cengalabs.flatui.views.FlatTextView
-                android:id="@+id/grid_mean"
+                android:id="@+id/speech_word"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="단어 뜻"
-                android:textSize="20dp"
+                android:text="단어(발음기호)"
+                android:textSize="20dip"
                 flatui:fl_textColor="main"
-                flatui:fl_theme="@array/dark" />
-            
-        </HorizontalScrollView>
-</LinearLayout>
+                flatui:fl_theme="@array/deep" />
+
+            <Button
+                android:id="@+id/btn_tts"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_tts"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:weightSum="1" >
+
+            <HorizontalScrollView
+                style="@style/Scroll.Horizontal.Igotit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1" >
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/speech_mean"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="단어 뜻"
+                    android:textSize="20dp"
+                    flatui:fl_textColor="main"
+                    flatui:fl_theme="@array/dark" />
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/btn_speech"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_mic"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/study_grid_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="0.98"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <GridView
             android:id="@+id/study_grid"

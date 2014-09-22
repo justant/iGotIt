@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +24,6 @@ import com.example.igotit.R;
 
 import database.DatabaseManager;
 import fragments.study.StudyActivity;
-import fragments.study.Words;
 
 
 public class FragmentMyCourseStudying extends SherlockFragment {
@@ -35,6 +33,7 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 	
 	private List<MyCourseListItem> myCourseListItems;
 	private ListView listView; 
+	private MyCourseAdapter myCourseAdapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +47,8 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 		
 		View view = inflater.inflate(R.layout.fragment_course, container, false);
 		listView = (ListView) view.findViewById(R.id.studyListView);
-		listView.setAdapter(new MyCourseAdapter(getActivity(), myCourseListItems));
+		myCourseAdapter = new MyCourseAdapter(getActivity(), myCourseListItems);
+		listView.setAdapter(myCourseAdapter);
 		
 		return view;
 	}
@@ -60,6 +60,8 @@ public class FragmentMyCourseStudying extends SherlockFragment {
 		dbAdapter.open();
 		Cursor cursor = dbAdapter.fetchAll(tableName);
 		cursor.moveToPosition(0); 
+		
+		myCourseListItems.clear();
 		
 		while (!cursor.isAfterLast()) {
 			// vocabulary_id, name, editor, word_size, learn, type, state

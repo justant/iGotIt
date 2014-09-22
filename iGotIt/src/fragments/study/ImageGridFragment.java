@@ -9,6 +9,7 @@ import image.google.GoogleImageSearchTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
@@ -22,6 +23,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageFormat;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -37,11 +39,15 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -50,6 +56,7 @@ import com.cengalabs.flatui.FlatUI;
 import com.cengalabs.flatui.views.FlatButton;
 import com.cengalabs.flatui.views.FlatTextView;
 import com.example.igotit.R;
+import com.mohammadag.soundrecorder.activities.SpeechActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -68,12 +75,19 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
     public static final int MIN_ITEMS = 50;
     public static final String RESULT_KEY = "result";
     
+    private Animation fadeIn;
+    private Animation fadeOut;
+    
     private static Handler mHandler;
     
+    private Button btnTts;
+    private Button btnSpeech;
 	private FlatButton btnSkip;
 	private FlatButton btnIGotIt;
 	private FlatTextView textViewWord;
 	private FlatTextView textViewMean;
+	private LinearLayout layoutStudyGrid;
+	private LinearLayout layoutStudySpeech;
 	
 	// tts
 	private TextToSpeech mTTS;
@@ -112,7 +126,7 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fr_image_grid, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_image_grid, container, false);
 		
 		setUpFragment(rootView);
 		mExecutor = Executors.newSingleThreadExecutor();
@@ -126,9 +140,8 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// 일단은 ㄴㄴ
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// 확대 이미지
 				// startImagePagerActivity(position);
 			}
 		});
@@ -170,13 +183,17 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 		FlatUI.setDefaultTheme(FlatUI.ORANGE);
 		
 		// 텍스트 객체 선언
-		textViewWord = (FlatTextView) rootView.findViewById(R.id.grid_word);
-		textViewMean = (FlatTextView) rootView.findViewById(R.id.grid_mean);
-		textViewWord.setOnTouchListener(touchListener);
+		textViewWord = (FlatTextView) rootView.findViewById(R.id.speech_word);
+		textViewMean = (FlatTextView) rootView.findViewById(R.id.speech_mean);
 		
 		// 버튼 객체 선언
+		btnTts = (Button) rootView.findViewById(R.id.btn_tts);
+		btnSpeech = (Button) rootView.findViewById(R.id.btn_speech);
 		btnSkip = (FlatButton) rootView.findViewById(R.id.btn_skip);
 		btnIGotIt = (FlatButton) rootView.findViewById(R.id.btn_igotit);
+		
+		btnSpeech.setOnClickListener(clickListener);
+		btnTts.setOnClickListener(clickListener);
 		btnSkip.setOnClickListener(clickListener);
 		btnIGotIt.setOnClickListener(clickListener);
 		
@@ -197,6 +214,12 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
         
         // tts setting
         mTTS = new TextToSpeech(this.getActivity(), ttsListener);
+        
+        layoutStudyGrid = (LinearLayout) rootView.findViewById(R.id.layout_study_grid);
+        layoutStudySpeech = (LinearLayout) rootView.findViewById(R.id.layout_study_speech);
+        
+        fadeIn = AnimationUtils.loadAnimation(this.getActivity(), R.anim.fade_in_layout);
+        fadeOut = AnimationUtils.loadAnimation(this.getActivity(), R.anim.fade_out_layout);
 	}
 	
 	private void setSearchState() {
@@ -288,27 +311,6 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 		}
 	};
 	
-	// 터치 리스너 ( 단어를 눌렀을때 tts 발음)
-	OnTouchListener touchListener = new OnTouchListener() {
-		@Override
-		public boolean onTouch(View view, MotionEvent event) {
-			Log.v(TAG,"touchListener");
-			
-			switch(view.getId()){
-			
-			case R.id.grid_word :
-				if(event.getAction() == MotionEvent.ACTION_DOWN){
-					Log.v(TAG,"touch grid_word");
-					// tts
-					playTTS();
-				}
-				break;
-			}
-
-			return false;
-		}
-	};
-	
 	// 버튼 리스너
 	OnClickListener clickListener = new OnClickListener() {
 		@Override
@@ -316,6 +318,21 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 			Log.v(TAG,"clickListener");
 				
 			switch(view.getId()){
+			
+			
+			case R.id.btn_tts:
+				Log.v(TAG, "btn_tts Click!");
+				playTTS();
+				
+				break;
+			
+			case R.id.btn_speech:
+				Log.v(TAG, "btn_speech Click!");
+				stopCurrentTask();
+				
+				startImageSpeechActivity(wordPosition);
+				
+				break;
 			
 			case R.id.btn_skip:
 				Log.v(TAG, "btn_skip Click!");
@@ -348,6 +365,13 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 			}
 		}
 	};
+	
+	// Speech Activity를 호출한다.
+	public void startImageSpeechActivity(int pos){
+		Log.v(TAG, "startImageSpeechActivity");
+		Intent intent = new Intent(getActivity(), SpeechActivity.class);
+		getActivity().startActivity(intent);
+	}
 	
 	// fragment 종료
 	public void finishFragment(Activity act){
