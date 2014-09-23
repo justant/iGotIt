@@ -1,15 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/speech_card_background_white" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="0.01"
+        android:orientation="vertical"
+        android:weightSum="2" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:weightSum="1" >
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:id="@+id/speech_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="단어(발음기호)"
+                android:textSize="20dip"
+                flatui:fl_textColor="main"
+                flatui:fl_theme="@array/deep" />
+
+            <Button
+                android:id="@+id/btn_tts"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_tts"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:weightSum="1" >
+
+            <HorizontalScrollView
+                style="@style/Scroll.Horizontal.Igotit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1" >
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/speech_mean"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="단어 뜻"
+                    android:textSize="20dp"
+                    flatui:fl_textColor="main"
+                    flatui:fl_theme="@array/dark" />
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/btn_speech"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_mic"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.mohammadag.soundrecorder.views.SoundLevelBarsView
+        android:id="@+id/bars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_layout"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp" />
 
     <RelativeLayout
         android:id="@+id/time_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/filename_textview" >
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1" >
 
         <com.mohammadag.soundrecorder.views.RecordingStateView
             android:id="@+id/state_view"
@@ -31,27 +123,5 @@
             android:text="@string/example_time"
             android:textSize="80sp" />
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/filename_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif-condensed"
-        android:textColor="#ff4444"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="invisible" />
-
-    <com.mohammadag.soundrecorder.views.SoundLevelBarsView
-        android:id="@+id/bars"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/time_layout" />
 
 </RelativeLayout>

@@ -12,6 +12,7 @@ import com.mohammadag.soundrecorder.fragments.RecordingStatusFragment;
 import com.mohammadag.soundrecorder.fragments.RecordingsListFragment;
 import com.mohammadag.soundrecorder.fragments.SettingsFragment;
 
+import singleton.Utility;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -30,6 +31,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +45,8 @@ import android.widget.ListView;
 public class SpeechActivity extends Activity implements OnAudioLevelChangedListener, OnItemClickListener {
 	@SuppressWarnings("unused")
 	private static final String TAG = SpeechActivity.class.getSimpleName();
-
+	private Utility utility = Utility.getInstance();
+	
 	private static final int REQUEST_CODE_SETTINGS = 0;
 
 	private RecordingService mRecordingService;
@@ -54,6 +57,8 @@ public class SpeechActivity extends Activity implements OnAudioLevelChangedListe
 	private AboutFragment mAboutFragment;
 	private SettingsFragment mSettingsFragment;
 
+	private int wordPosition;
+	
 	private boolean mRecordingQueued = false;
 	private boolean mIsKitKatTranslucencyEnabled = false;
 	private boolean mBackButtonAlwaysQuits = false;
@@ -142,9 +147,12 @@ public class SpeechActivity extends Activity implements OnAudioLevelChangedListe
 
 		if (savedInstanceState == null) {
 			FragmentTransaction transaction = getFragmentManager().beginTransaction();
-			mRecordingStatusFragment = new RecordingStatusFragment();
+			
+			// 단어의 위치정보를 recordingstatus에 넘겨준다
+			wordPosition = this.getIntent().getIntExtra("SpeechActivity_position", 0);
+			mRecordingStatusFragment = new RecordingStatusFragment(wordPosition);
 			mRecordingStatusFragment.setRetainInstance(true);
-
+			
 			mRecordingControlsFragment = new RecordingControlsFragment();
 			mRecordingControlsFragment.setRetainInstance(true);
 
@@ -190,7 +198,7 @@ public class SpeechActivity extends Activity implements OnAudioLevelChangedListe
 			transaction.add(R.id.status_container, mRecordingStatusFragment);
 			transaction.commit();
 		}
-
+		
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(
 				this, mDrawerLayout, R.drawable.speech_ic_navigation_drawer, 

@@ -159,17 +159,18 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 		textViewWord.setText(
 				utility.getChapterWordList().get(pos).getWord());
 
-		// 뜻 ( '|' 이것을 띄어쓰기로 구분해준다.)
-		String mean = utility.getChapterWordList().get(pos).getMean();
-		String result = "";
-		if(mean != null){
-			StringTokenizer token = new StringTokenizer(mean, "|");
-			for(int i = 0; i < token.countTokens() - 1; i++){
-				result += token.nextToken() + ", ";
-			}
-			result += token.nextToken();
-		}
-		textViewMean.setText(result);
+//		// 뜻 ( '|' 이것을 띄어쓰기로 구분해준다.)
+//		String mean = utility.getChapterWordList().get(pos).getMean();
+//		String result = "";
+//		if(mean != null){
+//			StringTokenizer token = new StringTokenizer(mean, "|");
+//			for(int i = 0; i < token.countTokens() - 1; i++){
+//				result += token.nextToken() + ", ";
+//			}
+//			result += token.nextToken();
+//		}
+		
+		textViewMean.setText(utility.getChapterWordList().get(pos).getMean());
 		//textViewMean.setText("textViewMean.setText(utility.getChapterWordList().get(pos).getMean());");
 		
 		//textViewMean.setText(utility.getChapterWordList().get(pos).getMean());
@@ -329,6 +330,7 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 			case R.id.btn_speech:
 				Log.v(TAG, "btn_speech Click!");
 				stopCurrentTask();
+				onPause();
 				
 				startImageSpeechActivity(wordPosition);
 				
@@ -370,6 +372,9 @@ public class ImageGridFragment extends AbsListViewBaseFragment implements Callba
 	public void startImageSpeechActivity(int pos){
 		Log.v(TAG, "startImageSpeechActivity");
 		Intent intent = new Intent(getActivity(), SpeechActivity.class);
+		// 단어의 위치 정보를 전달한다
+		intent.putExtra("SpeechActivity_position", wordPosition);
+		
 		getActivity().startActivity(intent);
 	}
 	

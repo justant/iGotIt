@@ -2,6 +2,7 @@ package fragments.study;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import singleton.Utility;
 import android.app.Activity;
@@ -214,8 +215,24 @@ public class StudyActivity extends Activity {
 						startPos = position * 100;
 						wordSize = listItems.get(position).getWordSize();
 			
+						String mean;
+						String result;
+						int cnt = 0;
 						for (int i = startPos; i < startPos + wordSize; i++) {
 							utility.getChapterWordList().add(wordList.get(i));
+							
+							// 뜻 ( '|' 이것을 띄어쓰기로 구분해준다.)
+							mean = utility.getChapterWordList().get(cnt).getMean();
+							result = "";
+							if(mean != null){
+								StringTokenizer token = new StringTokenizer(mean, "|");
+								for(int j = 0; j < token.countTokens() - 1; j++){
+									result += token.nextToken() + ", ";
+								}
+								result += token.nextToken();
+							}
+							
+							utility.getChapterWordList().get(cnt++).setMean(result);
 						}
 			
 						// request code 1 = gridFragment;

@@ -33,6 +33,7 @@
         
         <activity android:name="fragments.study.StudyActivity" />
         <activity android:name="main.MainActivity" />
+        <activity android:name="main.testActivity" />
         <activity android:name="fragments.study.SimpleImageActivity" />
         <activity android:name="com.mohammadag.soundrecorder.activities.SpeechActivity" />
         <service android:name="com.mohammadag.soundrecorder.RecordingService" />
